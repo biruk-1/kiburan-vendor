@@ -79,8 +79,8 @@ export function CreateBusinessScreen() {
   return (
     <Screen scroll header={<HeaderBar title="Register your business" showBack={false} />}>
       <AppText color="textMuted">
-        Tell couples who you are. New businesses start as drafts. Submitting sends them for Kiburan review before they
-        can appear in the marketplace.
+        Tell couples who you are. Save a draft anytime. When you submit for review, the business becomes available in the
+        couple marketplace once approved (on local Kiburan, approval is automatic so you can test Explore right away).
       </AppText>
 
       <Controller
