@@ -3,7 +3,7 @@ import type { VerificationStatus } from '@/features/account/types';
 
 const PILL: Record<VerificationStatus, { label: string; tone: PillTone; icon: 'check-circle' | 'clock' | 'x-circle' | 'shield' }> = {
   verified: { label: 'Business Verified', tone: 'success', icon: 'check-circle' },
-  pending: { label: 'Verification pending', tone: 'warning', icon: 'clock' },
+  pending: { label: 'Pending verification', tone: 'warning', icon: 'clock' },
   unverified: { label: 'Not verified', tone: 'neutral', icon: 'shield' },
   rejected: { label: 'Verification rejected', tone: 'danger', icon: 'x-circle' },
 };

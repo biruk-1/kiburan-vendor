@@ -7,7 +7,8 @@ import {
 import { mapDataError, type ServiceResult } from '@/lib/query/queryError';
 import { supabase } from '@/lib/supabase/client';
 
-const VENDOR_COLUMNS = 'id, business_name, slug, logo_url, verification_status, listing_status, owner_user_id';
+const VENDOR_COLUMNS =
+  'id, business_name, slug, logo_url, verification_status, listing_status, owner_user_id, rejection_reason, suspended_reason';
 
 type VendorRow = {
   id: string;
@@ -17,6 +18,8 @@ type VendorRow = {
   verification_status: string;
   listing_status: string;
   owner_user_id: string;
+  rejection_reason: string | null;
+  suspended_reason: string | null;
 };
 
 function toMembership(row: VendorRow, userId: string, teamRole: string | null): VendorMembership {
@@ -30,6 +33,8 @@ function toMembership(row: VendorRow, userId: string, teamRole: string | null): 
     listingStatus: parseListingStatus(row.listing_status),
     role: isLegalOwner ? 'owner' : parseVendorRole(teamRole ?? 'staff'),
     isLegalOwner,
+    rejectionReason: row.rejection_reason,
+    suspendedReason: row.suspended_reason,
   };
 }
 

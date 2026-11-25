@@ -21,6 +21,8 @@ function vendor(overrides: Partial<VendorMembership> = {}): VendorMembership {
     listingStatus: 'published',
     role: 'owner',
     isLegalOwner: true,
+    rejectionReason: null,
+    suspendedReason: null,
     ...overrides,
   };
 }

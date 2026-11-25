@@ -15,6 +15,8 @@ export type VendorMembership = {
   role: VendorRole;
   /** `vendors.owner_user_id` — the single legal owner, distinct from team role `owner`. */
   isLegalOwner: boolean;
+  rejectionReason: string | null;
+  suspendedReason: string | null;
 };
 
 /**

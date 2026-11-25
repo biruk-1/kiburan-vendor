@@ -53,7 +53,7 @@ function EarningsBody({ summary }: { summary: EarningsSummary }) {
       <EmptyState
         icon="credit-card"
         title="No booking value yet"
-        message="Agreed amounts from pending, confirmed, and completed bookings will show here. This is not a payment ledger — payouts are not tracked yet."
+        message="Agreed amounts from pending, confirmed, and completed bookings will show here. Link Chapa payouts under Profile to receive split deposits from couple payments."
       />
     );
   }

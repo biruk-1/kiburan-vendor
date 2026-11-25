@@ -49,6 +49,7 @@ export function ProfileScreen() {
     { label: 'Reviews', icon: 'star', onPress: () => router.navigate('/profile/reviews' as Href) },
     { label: 'Business Settings', icon: 'settings', onPress: () => router.navigate('/profile/settings') },
     { label: 'Earnings', icon: 'credit-card', onPress: () => router.navigate('/profile/earnings' as Href) },
+    { label: 'Chapa payouts', icon: 'dollar-sign', onPress: () => router.navigate('/profile/payouts' as Href) },
     { label: 'Support & Help', icon: 'help-circle' },
     { label: 'About Kiburan Vendor', icon: 'info' },
   ];

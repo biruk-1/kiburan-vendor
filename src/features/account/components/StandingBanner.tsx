@@ -22,13 +22,14 @@ const COPY: Record<
     tone: 'info',
   },
   pending_review: {
-    title: 'Under review',
-    message: 'Kiburan is reviewing your business. You can keep editing services while you wait.',
+    title: 'Waiting for verification',
+    message:
+      'Your business is in the admin verification queue. Couples cannot find you yet. You can keep editing services while you wait.',
     tone: 'warning',
   },
   rejected: {
     title: 'Needs changes',
-    message: 'Your listing was not approved. Update your details and submit again.',
+    message: 'Your listing was not approved. Update your details and submit again for admin review.',
     tone: 'danger',
   },
   verified_unpublished: {
@@ -51,6 +52,13 @@ export function StandingBanner() {
 
   if (standing === 'live') return null;
   const copy = COPY[standing];
+  let message = copy.message;
+  if (standing === 'rejected' && vendor.rejectionReason) {
+    message = `${message} Reason: ${vendor.rejectionReason}`;
+  }
+  if (standing === 'suspended' && vendor.suspendedReason) {
+    message = `${message} Reason: ${vendor.suspendedReason}`;
+  }
   const canSubmit =
     canManageBusiness(vendor.role) && vendor.isLegalOwner && (standing === 'draft' || standing === 'rejected');
   const canPublish = canManageBusiness(vendor.role) && standing === 'verified_unpublished';
@@ -83,7 +91,7 @@ export function StandingBanner() {
     <Card style={[styles.card, styles[copy.tone]]}>
       <View style={styles.text}>
         <AppText variant="headline">{copy.title}</AppText>
-        <AppText color="textMuted">{copy.message}</AppText>
+        <AppText color="textMuted">{message}</AppText>
         {error ? (
           <AppText variant="caption" color="danger" accessibilityRole="alert">
             {error}

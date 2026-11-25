@@ -17,6 +17,7 @@ import { StandingBanner } from '@/features/account/components/StandingBanner';
 import { VerificationPill } from '@/features/account/components/VerificationPill';
 import { useAccount, useActiveVendor } from '@/features/account/context/AccountContext';
 import { useMyDisplayName } from '@/features/business-profile/hooks/useBusinessQueries';
+import { ActivityAlerts } from '@/features/dashboard/components/ActivityAlerts';
 import { useDashboard } from '@/features/dashboard/hooks/useDashboard';
 import type { Activity, ActivityKind, DashboardData } from '@/features/dashboard/services/dashboardService';
 import { errorMessage } from '@/lib/query/queryError';
@@ -32,7 +33,7 @@ const ACTIVITY_ICON: Record<ActivityKind, ComponentProps<typeof Feather>['name']
 };
 
 export function DashboardScreen() {
-  const { vendor, vendors } = useActiveVendor();
+  const { vendor, vendors, standing } = useActiveVendor();
   const { clearSelection } = useAccount();
   const displayName = useMyDisplayName();
   const dashboard = useDashboard(vendor.vendorId);
@@ -84,6 +85,12 @@ export function DashboardScreen() {
         </Card>
       ) : (
         <>
+          <ActivityAlerts
+            standing={standing}
+            newInquiries={dashboard.data.newInquiries}
+            pendingBookings={dashboard.data.pendingBookings}
+          />
+
           <Card padded={false} style={styles.stats}>
             <StatTile
               icon="message-square"

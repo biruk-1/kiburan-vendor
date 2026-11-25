@@ -785,14 +785,14 @@ isOneToOne: false
                   ]
                 },"vendors": {
                   Row: {
-                    "address": string | null,"business_name": string,"city": string | null,"country_code": string,"cover_url": string | null,"created_at": string,"description": string | null,"email": string | null,"id": string,"instagram_url": string | null,"listing_status": string,"logo_url": string | null,"owner_user_id": string,"phone": string | null,"slug": string,"updated_at": string,"verification_status": string,"website_url": string | null
+                    "address": string | null,"business_name": string,"chapa_subaccount_id": string | null,"city": string | null,"country_code": string,"cover_url": string | null,"created_at": string,"description": string | null,"email": string | null,"id": string,"instagram_url": string | null,"listing_status": string,"logo_url": string | null,"owner_user_id": string,"payout_account_name": string | null,"payout_account_number": string | null,"payout_bank_code": string | null,"payout_split_type": string | null,"payout_split_value": number | null,"phone": string | null,"rejection_reason": string | null,"slug": string,"suspended_reason": string | null,"updated_at": string,"verification_status": string,"verified_at": string | null,"verified_by": string | null,"website_url": string | null
                   }
                   ComputedFields: never
                   Insert: {
-                    "address"?: string | null,"business_name": string,"city"?: string | null,"country_code"?: string,"cover_url"?: string | null,"created_at"?: string,"description"?: string | null,"email"?: string | null,"id"?: string,"instagram_url"?: string | null,"listing_status"?: string,"logo_url"?: string | null,"owner_user_id": string,"phone"?: string | null,"slug": string,"updated_at"?: string,"verification_status"?: string,"website_url"?: string | null
+                    "address"?: string | null,"business_name": string,"chapa_subaccount_id"?: string | null,"city"?: string | null,"country_code"?: string,"cover_url"?: string | null,"created_at"?: string,"description"?: string | null,"email"?: string | null,"id"?: string,"instagram_url"?: string | null,"listing_status"?: string,"logo_url"?: string | null,"owner_user_id": string,"payout_account_name"?: string | null,"payout_account_number"?: string | null,"payout_bank_code"?: string | null,"payout_split_type"?: string | null,"payout_split_value"?: number | null,"phone"?: string | null,"rejection_reason"?: string | null,"slug": string,"suspended_reason"?: string | null,"updated_at"?: string,"verification_status"?: string,"verified_at"?: string | null,"verified_by"?: string | null,"website_url"?: string | null
                   }
                   Update: {
-                    "address"?: string | null,"business_name"?: string,"city"?: string | null,"country_code"?: string,"cover_url"?: string | null,"created_at"?: string,"description"?: string | null,"email"?: string | null,"id"?: string,"instagram_url"?: string | null,"listing_status"?: string,"logo_url"?: string | null,"owner_user_id"?: string,"phone"?: string | null,"slug"?: string,"updated_at"?: string,"verification_status"?: string,"website_url"?: string | null
+                    "address"?: string | null,"business_name"?: string,"chapa_subaccount_id"?: string | null,"city"?: string | null,"country_code"?: string,"cover_url"?: string | null,"created_at"?: string,"description"?: string | null,"email"?: string | null,"id"?: string,"instagram_url"?: string | null,"listing_status"?: string,"logo_url"?: string | null,"owner_user_id"?: string,"payout_account_name"?: string | null,"payout_account_number"?: string | null,"payout_bank_code"?: string | null,"payout_split_type"?: string | null,"payout_split_value"?: number | null,"phone"?: string | null,"rejection_reason"?: string | null,"slug"?: string,"suspended_reason"?: string | null,"updated_at"?: string,"verification_status"?: string,"verified_at"?: string | null,"verified_by"?: string | null,"website_url"?: string | null
                   }
                   Relationships: [
                     {
@@ -1195,6 +1195,9 @@ isOneToOne: false
       } },
 "accept_vendor_quote":
 { Args: { "p_quote_id": string }; Returns: Json
+                           },
+"vendor_set_payout_details":
+{ Args: { "p_vendor_id": string,"p_account_name": string,"p_account_number": string,"p_bank_code": string,"p_chapa_subaccount_id"?: string,"p_split_type"?: string,"p_split_value"?: number }; Returns: Json
                            },
 "accept_wedding_invite":
 { Args: { "p_raw_token": string }; Returns: {

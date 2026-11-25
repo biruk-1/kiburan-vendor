@@ -20,6 +20,7 @@ export type Activity = {
 
 export type DashboardData = {
   newInquiries: number;
+  pendingBookings: number;
   activeBookings: number;
   reviewAverage: number | null;
   reviewCount: number;
@@ -98,6 +99,7 @@ export async function getDashboard(vendorId: string): Promise<ServiceResult<Dash
     ok: true,
     data: {
       newInquiries: summary.new_inquiries,
+      pendingBookings: summary.pending_bookings,
       activeBookings: summary.active_bookings,
       reviewAverage: summary.review_average,
       reviewCount: summary.review_count,

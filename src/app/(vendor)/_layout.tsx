@@ -4,6 +4,8 @@ import type { ComponentProps } from 'react';
 import type { ColorValue } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { useActiveVendor } from '@/features/account/context/AccountContext';
+import { useVendorAlertCounts } from '@/features/dashboard/hooks/useVendorAlertCounts';
 import { colors, fontFamilies, sizes } from '@/theme';
 
 type FeatherName = ComponentProps<typeof Feather>['name'];
@@ -14,9 +16,17 @@ function tabIcon(name: FeatherName) {
   };
 }
 
+function badge(count: number): string | undefined {
+  if (count <= 0) return undefined;
+  return count > 99 ? '99+' : String(count);
+}
+
 /** Each tab is its own stack, so detail screens keep the tab bar as the design shows. */
 export default function VendorTabsLayout() {
   const insets = useSafeAreaInsets();
+  const { vendor } = useActiveVendor();
+  const alerts = useVendorAlertCounts(vendor.vendorId);
+
   return (
     <Tabs
       screenOptions={{
@@ -24,6 +34,12 @@ export default function VendorTabsLayout() {
         tabBarActiveTintColor: colors.primaryDark,
         tabBarInactiveTintColor: colors.textSubtle,
         tabBarLabelStyle: { fontFamily: fontFamilies.medium, fontSize: 11, lineHeight: 14 },
+        tabBarBadgeStyle: {
+          backgroundColor: colors.danger,
+          color: colors.onPrimary,
+          fontSize: 10,
+          fontFamily: fontFamilies.medium,
+        },
         tabBarStyle: {
           backgroundColor: colors.surface,
           borderTopColor: colors.border,
@@ -33,10 +49,31 @@ export default function VendorTabsLayout() {
         },
         sceneStyle: { backgroundColor: colors.background },
       }}>
-      <Tabs.Screen name="home" options={{ title: 'Home', tabBarIcon: tabIcon('home') }} />
-      <Tabs.Screen name="bookings" options={{ title: 'Bookings', tabBarIcon: tabIcon('calendar') }} />
+      <Tabs.Screen
+        name="home"
+        options={{
+          title: 'Home',
+          tabBarIcon: tabIcon('home'),
+          tabBarBadge: badge(alerts.total),
+        }}
+      />
+      <Tabs.Screen
+        name="bookings"
+        options={{
+          title: 'Bookings',
+          tabBarIcon: tabIcon('calendar'),
+          tabBarBadge: badge(alerts.pendingBookings),
+        }}
+      />
       <Tabs.Screen name="services" options={{ title: 'Services', tabBarIcon: tabIcon('star') }} />
-      <Tabs.Screen name="messages" options={{ title: 'Inquiries', tabBarIcon: tabIcon('message-square') }} />
+      <Tabs.Screen
+        name="messages"
+        options={{
+          title: 'Inquiries',
+          tabBarIcon: tabIcon('message-square'),
+          tabBarBadge: badge(alerts.newInquiries),
+        }}
+      />
       <Tabs.Screen name="profile" options={{ title: 'Profile', tabBarIcon: tabIcon('user') }} />
     </Tabs>
   );

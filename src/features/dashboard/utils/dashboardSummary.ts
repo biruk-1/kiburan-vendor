@@ -2,6 +2,7 @@ import { VALUE_MONTHS, type BookingValueSummary } from '@/features/dashboard/uti
 
 export type SummaryPayload = {
   new_inquiries: number;
+  pending_bookings: number;
   active_bookings: number;
   review_count: number;
   review_average: number | null;
@@ -21,8 +22,12 @@ export function parseDashboardSummary(raw: unknown): SummaryPayload | null {
   const series = seriesRaw.map((value) => Number(value));
   if (series.some((value) => Number.isNaN(value))) return null;
 
+  const pendingBookingsRaw = row.pending_bookings;
+  const pending_bookings =
+    pendingBookingsRaw === undefined || pendingBookingsRaw === null ? 0 : Number(pendingBookingsRaw);
   const numbers = {
     new_inquiries: Number(row.new_inquiries),
+    pending_bookings,
     active_bookings: Number(row.active_bookings),
     review_count: Number(row.review_count),
     booking_value_this_month: Number(row.booking_value_this_month),
